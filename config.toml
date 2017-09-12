@@ -1,4 +1,4 @@
-baseurl = ""
+baseurl = "/blog"
 languageCode = "en-us"
 title = "Mindbliss Blog"
 theme = "hugo-strata-theme"
