@@ -1,0 +1,18 @@
+<section>
+
+
+    {{ range first 1 (where .Data.Pages "Section" "post") }}
+
+
+    <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+    <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+    <time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>
+     - Read in {{ .ReadingTime }} Min
+    <br clear="all">
+
+    <img class="12u 12u$(xsmall)" src="{{ .Site.BaseURL }}images/posts/{{ .Params.banner }}" alt=""/></a>
+    <div class="summary">{{ .Summary }}</div>
+    <a href="{{ .Permalink }}">Read more →</a>
+    <!--<li><a href="{{ .Permalink }}">{{ .Title }}</a></li>-->
+    {{ end }}
+</section>

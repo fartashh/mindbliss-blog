@@ -1,0 +1,20 @@
+{{ "<!-- Footer -->" | safeHTML }}
+<footer id="footer" class="container center">
+
+	© MINDBLISS 2017
+
+</footer>
+
+{{ "<!-- Scripts -->" | safeHTML }}
+<script src="{{ .Site.BaseURL }}js/jquery.min.js"></script>
+<script src="{{ .Site.BaseURL }}js/jquery.poptrox.min.js"></script>
+<script src="{{ .Site.BaseURL }}js/skel.min.js"></script>
+<script src="{{ .Site.BaseURL }}js/util.js"></script>
+<!--[if lte IE 8]><script src="{{ .Site.BaseURL }}js/ie/respond.min.js"></script><![endif]-->
+<script src="{{ .Site.BaseURL }}js/main.js"></script>
+
+{{ template "_internal/google_analytics_async.html" . }}
+
+{{ range .Site.Params.custom_js }}
+<script src="{{ $.Site.BaseURL }}{{ . }}"></script>
+{{ end }}

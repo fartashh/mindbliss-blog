@@ -1,0 +1,43 @@
+{{ "<!-- Header -->" | safeHTML }}
+<header id="header" class="container">
+    <div class="float-left">
+        <a href="{{ .Site.BaseURL }}" class="image avatar"><img
+                src="{{ .Site.BaseURL }}images/{{ .Site.Params.sidebar.avatar }}" alt=""/></a>
+    </div>
+    <div class="float-right">
+        <ul class="icons">
+            {{ with .Site.Params.sidebar.facebook }}
+            <li><a href="//facebook.com/{{ . }}" target="_blank" class="icon fa-facebook"><span
+                    class="label">Facebook</span></a></li>
+            {{ end }}
+            {{ with .Site.Params.sidebar.twitter }}
+            <li><a href="//twitter.com/{{ . }}" target="_blank" class="icon fa-twitter"><span
+                    class="label">Twitter</span></a></li>
+            {{ end }}
+            {{ with .Site.Params.sidebar.instagram }}
+            <li><a href="//twitter.com/{{ . }}" target="_blank" class="icon fa-instagram"><span
+                    class="label">Instagram</span></a></li>
+            {{ end }}
+            {{ if not .Site.Params.rss.hide }}
+            <li><a href="{{ if $.RSSLink }}{{ $.RSSLink }}{{ else }}{{ $.Site.RSSLink }}{{ end }}" class="icon fa-rss"
+                   type="application/rss+xml"><span class="label">RSS</span></a></li>
+            {{ end }}
+        </ul>
+    </div>
+    <!--{{ if not .Site.Params.avatar.hide }}-->
+    <!--<a href="{{ .Site.BaseURL }}" class="image avatar"><img src="{{ .Site.BaseURL }}images/{{ .Site.Params.sidebar.avatar }}" alt="" /></a>-->
+    <!--{{ end }}-->
+    <!--{{ with .Site.Params.sidebar.bio }}-->
+    <!--<h1>{{ . | markdownify }}</h1>-->
+    <!--{{ end }}-->
+
+    <!--{{ with .Site.Menus.main }}-->
+    <!--<nav id="sidebar">-->
+    <!--<ul>-->
+    <!--{{ range . }}-->
+    <!--<li><a href="{{ .URL | absURL }}">{{ .Name }}</a></li>-->
+    <!--{{ end }}-->
+    <!--</ul>-->
+    <!--</nav>-->
+    <!--{{ end }}-->
+</header>

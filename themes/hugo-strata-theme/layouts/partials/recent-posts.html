@@ -1,0 +1,50 @@
+{{ "<!-- recent post -->" | safeHTML }}
+<section id="two">
+    {{ with .Site.Params.recentposts.title }}<h2>{{ . | markdownify }}</h2>{{ end }}
+
+    <div class="row m-t-1em">
+        {{ range first 2 (after 1 (where .Data.Pages "Section" "post")) }}
+        <article class="6u 12u$(xsmall) ">
+            <a href="{{ .Permalink }}" class="image fit"><img src="{{ .Site.BaseURL }}images/posts/{{ .Params.banner }}"
+                                                              alt=""/></a>
+            <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+            <small>
+                <time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>
+                - Read in {{ .ReadingTime }} Min
+            </small>
+            <div class="summary">{{ .Summary }}</div>
+        </article>
+        {{ end }}
+    </div>
+
+
+    <div class="row m-t-1em">
+        {{ range first 3 (after 3 (where .Data.Pages "Section" "post")) }}
+        <article class="4u 12u$(xsmall) ">
+            <a href="{{ .Permalink }}" class="image fit"><img src="{{ .Site.BaseURL }}images/posts/{{ .Params.banner }}"
+                                                              alt=""/></a>
+            <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+            <small>
+                <time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>
+                - Read in {{ .ReadingTime }} Min
+            </small>
+            <div class="summary">{{ .Summary }}</div>
+        </article>
+        {{ end }}
+    </div>
+
+    <div class="row m-t-1em">
+        {{ range first 1 (after 5 (where .Data.Pages "Section" "post")) }}
+        <article class="12u 12u$(xsmall) ">
+            <a href="{{ .Permalink }}" class="image fit"><img src="{{ .Site.BaseURL }}images/posts/{{ .Params.banner }}"
+                                                              alt=""/></a>
+            <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+            <small>
+                <time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>
+                - Read in {{ .ReadingTime }} Min
+            </small>
+            <div class="summary">{{ .Summary }}</div>
+        </article>
+        {{ end }}
+    </div>
+</section>
