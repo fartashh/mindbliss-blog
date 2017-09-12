@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ipsum on Mindbliss Blog</title>
-    <link>/blog/categories/ipsum/</link>
+    <link>http://localhost:3000/blog/categories/ipsum/</link>
     <description>Recent content in Ipsum on Mindbliss Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Sep 2017 13:47:08 +0200</lastBuildDate>
     
-	<atom:link href="/blog/categories/ipsum/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:3000/blog/categories/ipsum/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Go is for lovers</title>
-      <link>/blog/post/2017-09-13-third-post/</link>
+      <link>http://localhost:3000/blog/post/2017-09-13-third-post/</link>
       <pubDate>Wed, 13 Sep 2017 13:47:08 +0200</pubDate>
       
-      <guid>/blog/post/2017-09-13-third-post/</guid>
+      <guid>http://localhost:3000/blog/post/2017-09-13-third-post/</guid>
       <description>&lt;p&gt;Monthly Recurring Revenue is one of the most important metrics you need for measuring health of your subscription business.
 Recently I have done comprehensive research to find out how to calculate MRR. Although I have found so many good definitions but I haven&amp;rsquo;t
 found any practical one. In this post I will explain how to calculate MRR by using one of my favourite python libraries (Pandas).
