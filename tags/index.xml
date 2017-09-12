@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Mindbliss Blog</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Mindbliss Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Sep 2017 13:07:31 +0200</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>General</title>
+      <link>/tags/general/</link>
+      <pubDate>Mon, 11 Sep 2017 13:07:31 +0200</pubDate>
+      
+      <guid>/tags/general/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mest</title>
+      <link>/tags/mest/</link>
+      <pubDate>Thu, 21 Sep 2017 13:07:31 +0200</pubDate>
+      
+      <guid>/tags/mest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test</title>
+      <link>/tags/test/</link>
+      <pubDate>Thu, 21 Sep 2017 13:07:31 +0200</pubDate>
+      
+      <guid>/tags/test/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
