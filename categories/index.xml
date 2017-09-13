@@ -11,20 +11,11 @@
     
     
     <item>
-      <title>Ipsum</title>
-      <link>https://www.mindbliss.com/blog/categories/ipsum/</link>
-      <pubDate>Wed, 13 Sep 2017 13:47:08 +0200</pubDate>
-      
-      <guid>https://www.mindbliss.com/blog/categories/ipsum/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Lorem</title>
-      <link>https://www.mindbliss.com/blog/categories/lorem/</link>
+      <title>General</title>
+      <link>https://www.mindbliss.com/blog/categories/general/</link>
       <pubDate>Thu, 21 Sep 2017 13:07:31 +0200</pubDate>
       
-      <guid>https://www.mindbliss.com/blog/categories/lorem/</guid>
+      <guid>https://www.mindbliss.com/blog/categories/general/</guid>
       <description></description>
     </item>
     
