@@ -1,5 +1,5 @@
 +++
-categories = ["Lorem"]
+categories = ["General"]
 date = "2017-09-12T13:50:46+02:00"
 menu = ""
 tags = []

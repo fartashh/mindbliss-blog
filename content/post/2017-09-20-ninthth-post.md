@@ -2,7 +2,7 @@
 title = "Hi Mindbliss5"
 date = "2017-09-20T13:07:31+02:00"
 tags = ["test","mest"]
-categories = ["Lorem"]
+categories = ["General"]
 menu = ""
 banner = "eighth-post/01.jpg"
 desc="asasdasdasdasd"
@@ -13,7 +13,7 @@ Recently I have done comprehensive research to find out how to calculate MRR. Al
 found any practical one. In this post I will explain how to calculate MRR by using one of my favourite python libraries (Pandas).
 <!--more-->
 
-{{< img src="/images/posts/eighth-post/01.jpg" title="" class="align-center">}}
+{{< img src="eighth-post/01.jpg" title="" class="align-center">}}
 
 ## Move static content to `static`
 Jekyll has a rule that any directory not starting with `_` will be copied as-is to the `_site` output. Hugo keeps all static content under `static`. You should therefore move it all there.

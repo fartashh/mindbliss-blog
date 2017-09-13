@@ -1,5 +1,5 @@
 +++
-categories = ["Ipsum"]
+categories = ["General"]
 date = "2017-09-13T13:47:08+02:00"
 menu = ""
 tags = []

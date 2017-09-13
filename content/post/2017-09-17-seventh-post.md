@@ -2,7 +2,7 @@
 title = "Migrate from Jekyll2"
 date = "2017-09-17T13:07:31+02:00"
 tags = []
-categories = ["Lorem"]
+categories = ["General"]
 menu = ""
 banner = "seventh-post/01.jpg"
 desc="asasdasdasdasd"

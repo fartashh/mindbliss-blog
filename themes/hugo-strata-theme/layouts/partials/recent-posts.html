@@ -1,6 +1,6 @@
 {{ "<!-- recent post -->" | safeHTML }}
 <section id="two">
-    {{ with .Site.Params.recentposts.title }}<h2>{{ . | markdownify }}</h2>{{ end }}
+    {{ with .Site.Params.recentposts.title }}<a href="{{ $.Site.BaseURL }}categories/general"> <h2>{{ . | markdownify }}</h2></a>{{ end }}
 
     <div class="row m-t-1em">
         {{ range first 2 (after 1 (where .Data.Pages "Section" "post")) }}
@@ -8,10 +8,10 @@
             <a href="{{ .Permalink }}" class="image fit"><img src="{{ .Site.BaseURL }}images/posts/{{ .Params.banner }}"
                                                               alt=""/></a>
             <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
-            <small>
-                <time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>
-                - Read in {{ .ReadingTime }} Min
-            </small>
+            <!--<small>-->
+                <!--<time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>-->
+                <!-- - Read in {{ .ReadingTime }} Min-->
+            <!--</small>-->
             <div class="summary">{{ .Summary }}</div>
         </article>
         {{ end }}
@@ -24,10 +24,10 @@
             <a href="{{ .Permalink }}" class="image fit"><img src="{{ .Site.BaseURL }}images/posts/{{ .Params.banner }}"
                                                               alt=""/></a>
             <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
-            <small>
-                <time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>
-                - Read in {{ .ReadingTime }} Min
-            </small>
+            <!--<small>-->
+                <!--<time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>-->
+                <!-- - Read in {{ .ReadingTime }} Min-->
+            <!--</small>-->
             <div class="summary">{{ .Summary }}</div>
         </article>
         {{ end }}
@@ -39,10 +39,10 @@
             <a href="{{ .Permalink }}" class="image fit"><img src="{{ .Site.BaseURL }}images/posts/{{ .Params.banner }}"
                                                               alt=""/></a>
             <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
-            <small>
-                <time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>
-                - Read in {{ .ReadingTime }} Min
-            </small>
+            <!--<small>-->
+                <!--<time datetime="{{ .Date }}">{{ .Date.Format .Site.Params.date_format }}</time>-->
+                <!-- - Read in {{ .ReadingTime }} Min-->
+            <!--</small>-->
             <div class="summary">{{ .Summary }}</div>
         </article>
         {{ end }}

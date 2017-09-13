@@ -3176,8 +3176,13 @@
 
  #footer{
 	     border-top: solid 2px #efefef;
+	 width: 100%;
  }
 
  .center{
 	 text-align: center;
+ }
+
+ .small{
+	 font-size: .8em;
  }

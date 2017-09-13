@@ -2,7 +2,7 @@
 title = "Hello Mindbliss"
 date = "2017-09-11T13:07:31+02:00"
 tags = ["General"]
-categories = ["Lorem"]
+categories = ["General"]
 menu = ""
 banner = "first-post/01.jpg"
 desc="asasdasdasdasd"
