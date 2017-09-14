@@ -8,6 +8,10 @@ googleAnalytics = "UA-79852189-1"
 # Define how many posts should appear on a site
 paginate = 10
 
+
+[permalinks]
+    post = "/:title/"
+
 [params]
 	# To provide some metadata for search engines feel free to add a few
     # information about you and your website.
