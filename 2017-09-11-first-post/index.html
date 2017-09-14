@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hello Mindbliss &middot; Mindbliss Blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="Mindbliss">
+		
+		<meta http-equiv="content-language" content="en-us" />
+
+		
+		<meta property="author" name="author" content="Mindbliss">
+		<meta property="og:type"  content="article" />
+		<meta property="og:url"  content="https://www.mindbliss.com/blog/2017-09-11-first-post/" />
+
+		<meta name="description" content="asasdasdasdasd">
+    	<meta name="og:description" content="asasdasdasdasd">
+
+		<meta name="og:site_name" content="Mindbliss Blog">
+		<meta name="og:title" content="Hello Mindbliss">
+		<meta name="og:url" content="https://www.mindbliss.com/blog/2017-09-11-first-post/">
+		
+		<meta name="og:image" content="https://www.mindbliss.com/blog/images/posts/first-post/01.jpg ">
+		
+		
+
+		<meta name="generator" content="Hugo 0.26" />
+
+
+
+		<link rel="shortcut icon" type="image/png" href="https://www.mindbliss.com/blog/images/favicon.png">
+
+		<!--[if lte IE 8]><script src='https://www.mindbliss.com/blog/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://www.mindbliss.com/blog/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://www.mindbliss.com/blog//css/ie8.css"><![endif]-->
+
+		
+		
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header" class="container">
+    <div class="float-left">
+        <a href="https://www.mindbliss.com/blog/" class="image avatar"><img
+                src="https://www.mindbliss.com/blog/images/logo_inverse.svg" alt=""/></a>
+    </div>
+    <div class="float-right">
+        <ul class="icons">
+            
+            <li><a href="//facebook.com/Mindblisstools" target="_blank" class="icon fa-facebook"><span
+                    class="label">Facebook</span></a></li>
+            
+            
+            <li><a href="//twitter.com/MindblissInc" target="_blank" class="icon fa-twitter"><span
+                    class="label">Twitter</span></a></li>
+            
+            
+            <li><a href="//twitter.com/mindblisstools" target="_blank" class="icon fa-instagram"><span
+                    class="label">Instagram</span></a></li>
+            
+            
+            <li><a href="https://www.mindbliss.com/blog/index.xml" class="icon fa-rss"
+                   type="application/rss+xml"><span class="label">RSS</span></a></li>
+            
+        </ul>
+    </div>
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>Hello Mindbliss</h1>
+
+		<small class="small">
+<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-09-11 13:07:31 &#43;0200 &#43;0200">Mon, Sep 11, 2017</time>&nbsp;&nbsp;
+
+4 min read&nbsp;&nbsp;
+</small>
+
+    
+    
+        
+        
+        
+        
+        
+    
+
+
+
+   
+   
+       
+       
+       
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    Monthly Recurring Revenue is one of the most important metrics you need for measuring health of your subscription business.
+Recently I have done comprehensive research to find out how to calculate MRR. Although I have found so many good definitions but I haven&rsquo;t
+found any practical one. In this post I will explain how to calculate MRR by using one of my favourite python libraries (Pandas).
+</p>
+
+<h2 id="what-is-mrr-and-how-calculate-it">What is MRR and How calculate it?</h2>
+
+<p>Before we start, let&rsquo;s define MRR. Zuora defines MRR as bellow;</p>
+
+<blockquote>
+<p>Monthly recurring revenue (MRR) is a dollar amount derived from a company’s total annual recurring revenue (ARR), normalized to a monthly value. In its simplest form, MRR is the money paid monthly for a subscription to a product or service. Properly used, it can provide valuable, unique insight into sales and cash flow dynamics.</p>
+</blockquote>
+
+<p>In order to understand it better, let&rsquo;s look at the following example;</p>
+
+<blockquote>
+<p>A new $120,000 annual contract starts on April 1, 2016 and ends on April 1, 2017.
+The question is How much Monthly Recurring Revenue was added and when?</p>
+</blockquote>
+
+<p>The answer to this question is simple, $10,000 in April 2016, specifically April 1, 2016. In other word; if no one else subscribe,
+the MRR form April 2016 till 2017 is $10,000.</p>
+
+<figure class="align-center">
+    
+        <img src="https://www.mindbliss.com/blog/images/posts//images/post/how-calculate-mrr/example.png"  />
+    
+    
+</figure>
+
+<p>According to the example, we need 3 parameters to be able to calculate the MRR;</p>
+
+<ul>
+<li>Subscription start date</li>
+<li>Subscription end date</li>
+<li>Value you are gonna get every day of month (I like to call it daily MRR but we can call it Monthly Recurring Charge MRC as well)</li>
+</ul>
+
+<h2 id="mrr-calculation">MRR Calculation</h2>
+
+<p>calculating MRR for one subscription is clear but what about real world example, in which we have thousands or millions of records.
+I break the process into two simple steps;</p>
+
+<p><strong>1. Calculate total MRC for each day</strong>
+ For instance, if you want to generate report form 1 Jan 2015 till 30 Dec 2015, we need to calculate (TMRC) total sum of MRC for every
+ day of the year.</p>
+
+<table>
+<thead>
+<tr>
+<th>date</th>
+<th>TMRC</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>01 Jan 2015</td>
+<td>$180</td>
+</tr>
+
+<tr>
+<td>02 Jan 2015</td>
+<td>$240</td>
+</tr>
+
+<tr>
+<td>03 Jan 2015</td>
+<td>$590</td>
+</tr>
+
+<tr>
+<td>&hellip;</td>
+<td>&hellip;</td>
+</tr>
+
+<tr>
+<td>&hellip;</td>
+<td>&hellip;</td>
+</tr>
+
+<tr>
+<td>27 Dec 2015</td>
+<td>$2080</td>
+</tr>
+
+<tr>
+<td>28 Dec 2015</td>
+<td>$620</td>
+</tr>
+
+<tr>
+<td>29 Dec 2015</td>
+<td>$900</td>
+</tr>
+
+<tr>
+<td>30 Dec 2015</td>
+<td>$120</td>
+</tr>
+
+<tr>
+<td>31 Dec 2015</td>
+<td>$780</td>
+</tr>
+</tbody>
+</table>
+
+<p>TMRC of <code>nDate</code> is equal to sum of all MRCs of subscriptions which are active and they started in the same day of <code>nDate</code></p>
+
+<p><strong>2. Generate the report</strong>
+ Based on data prepared in step 1, we can generate two important reports;</p>
+
+<ul>
+<li>Monthly Recurring Revenue which is equal to sum of all TMRC in one month.</li>
+<li>Rolling Monthly Recurring Revenue which is equal to sum of all TMRC of last 30 days.</li>
+</ul>
+
+<h2 id="case-study">Case study</h2>
+
+<p>I generate 16137 sample subscription records which you can download from <a href="/data/post/how-calculate-mrr/sample-subscription.csv">here</a>.
+And you can find the Ipython notebook of following codes <a href="/data/post/how-calculate-mrr/MRR-Report.ipynb">here</a>.</p>
+
+<p>Let&rsquo;s start to  generate the reports with pandas and matplotlib.</p>
+
+<h3 id="load-required-libraries">Load required libraries</h3>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #f92672">import</span> <span style="color: #f8f8f2">csv</span>
+    <span style="color: #f92672">import</span> <span style="color: #f8f8f2">pandas</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">pd</span>
+    <span style="color: #f92672">import</span> <span style="color: #f8f8f2">numpy</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">np</span>
+    <span style="color: #f92672">from</span> <span style="color: #f8f8f2">datetime</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">timedelta,</span> <span style="color: #f8f8f2">date</span>
+    <span style="color: #f92672">%</span><span style="color: #f8f8f2">matplotlib</span> <span style="color: #f8f8f2">inline</span>
+    <span style="color: #f92672">import</span> <span style="color: #f8f8f2">matplotlib</span>
+    <span style="color: #f92672">import</span> <span style="color: #f8f8f2">matplotlib.pyplot</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">plt</span>
+</pre></div>
+
+<h3 id="data-preprocessing">Data Preprocessing</h3>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #75715e"># loading data</span>
+    <span style="color: #f8f8f2">df</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">read_csv(</span><span style="color: #e6db74">&#39;sample-subscription.csv&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">report_start_date</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">date(</span><span style="color: #ae81ff">2015</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">report_end_date</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">date(</span><span style="color: #ae81ff">2015</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">12</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+
+    <span style="color: #75715e"># Data preprocessing</span>
+    <span style="color: #f8f8f2">df</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">fillna(report_end_date,</span> <span style="color: #f8f8f2">inplace</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+    <span style="color: #f8f8f2">df[</span><span style="color: #e6db74">&#39;subscription_start_date&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span><span style="color: #f8f8f2">pd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_datetime(df[</span><span style="color: #e6db74">&#39;subscription_start_date&#39;</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">format</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;%Y-%m-%d&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">df[</span><span style="color: #e6db74">&#39;subscription_end_date&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span><span style="color: #f8f8f2">pd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_datetime(df[</span><span style="color: #e6db74">&#39;subscription_end_date&#39;</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">format</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;%Y-%m-%d&#39;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<h3 id="calculate-tmrc-for-each-day">Calculate TMRC for each day</h3>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #75715e"># Helper function</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">daterange</span><span style="color: #f8f8f2">(start_date,</span> <span style="color: #f8f8f2">end_date):</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">range(int</span> <span style="color: #f8f8f2">((end_date</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">start_date)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">days)):</span>
+            <span style="color: #66d9ef">yield</span> <span style="color: #f8f8f2">start_date</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">timedelta(n)</span>
+
+    <span style="color: #75715e"># calculate tmrc for every day</span>
+    <span style="color: #f8f8f2">daily_mrr</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">[]</span>
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">my_date</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">daterange(report_start_date,</span> <span style="color: #f8f8f2">report_end_date):</span>
+        <span style="color: #f8f8f2">my_date_df</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">df[(df[</span><span style="color: #e6db74">&#39;subscription_end_date&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">&gt;=</span><span style="color: #f8f8f2">my_date</span> <span style="color: #f8f8f2">)</span>
+                        <span style="color: #f92672">&amp;</span> <span style="color: #f8f8f2">(df[</span><span style="color: #e6db74">&#39;subscription_start_date&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">my_date)</span>
+                        <span style="color: #f92672">&amp;</span> <span style="color: #f8f8f2">(df[</span><span style="color: #e6db74">&#39;subscription_start_date&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">apply(</span><span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x:</span> <span style="color: #f8f8f2">x</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">day)</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">my_date</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">day)]</span>
+        <span style="color: #f8f8f2">tmrc</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">my_date_df[</span><span style="color: #e6db74">&#39;dmrc&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sum()</span>
+        <span style="color: #f8f8f2">daily_mrr</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">append({</span><span style="color: #e6db74">&#39;date&#39;</span><span style="color: #f8f8f2">:my_date,</span><span style="color: #e6db74">&#39;mrc&#39;</span><span style="color: #f8f8f2">:tmrc})</span>
+
+    <span style="color: #75715e"># Visualization</span>
+    <span style="color: #f8f8f2">dates</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">matplotlib</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">dates</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">date2num([x[</span><span style="color: #e6db74">&#39;date&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">daily_mrr])</span>
+    <span style="color: #f8f8f2">y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[x[</span><span style="color: #e6db74">&#39;mrc&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">daily_mrr]</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">figure(figsize</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">20</span><span style="color: #f8f8f2">))</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">plot_date(dates,</span> <span style="color: #f8f8f2">y,</span><span style="color: #e6db74">&#39;-&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">rc(</span><span style="color: #e6db74">&#39;font&#39;</span><span style="color: #f8f8f2">,</span><span style="color: #f92672">**</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;family&#39;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;normal&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;weight&#39;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;bold&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;size&#39;</span>   <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">40</span><span style="color: #f8f8f2">})</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
+</pre></div>
+
+<p>
+<figure class="align-center">
+    
+        <img src="https://www.mindbliss.com/blog/images/posts//images/post/how-calculate-mrr/output_7_0.png"  />
+    
+    
+</figure>
+</p>
+
+<h3 id="generate-reports">Generate Reports</h3>
+
+<p>since we have our daily MRR data, we can group it by Monthly or Weekly.</p>
+
+<h4 id="monthly-mrr">Monthly MRR</h4>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #f8f8f2">df</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DataFrame(daily_mrr)</span>
+    <span style="color: #f8f8f2">df</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">df</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">set_index(pd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DatetimeIndex(df[</span><span style="color: #e6db74">&#39;date&#39;</span><span style="color: #f8f8f2">]))</span>
+    <span style="color: #75715e"># group by dataframe Monthly</span>
+    <span style="color: #f8f8f2">g_df</span><span style="color: #f92672">=</span> <span style="color: #f8f8f2">df</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">groupby(pd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TimeGrouper(</span><span style="color: #e6db74">&quot;m&quot;</span><span style="color: #f8f8f2">))</span>
+    <span style="color: #f8f8f2">res</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">g_df</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sum()</span>
+    <span style="color: #f8f8f2">res</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sort_index()</span>
+    <span style="color: #f8f8f2">res[</span><span style="color: #e6db74">&#39;date&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">res</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">index</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_datetime()</span>
+</pre></div>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #f8f8f2">dates</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">matplotlib</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">dates</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">date2num(res</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">index</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_pydatetime())</span>
+    <span style="color: #f8f8f2">y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">res[</span><span style="color: #e6db74">&#39;mrc&#39;</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">figure(figsize</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">20</span><span style="color: #f8f8f2">))</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">plot_date(dates,</span> <span style="color: #f8f8f2">y,</span><span style="color: #e6db74">&#39;-&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">rc(</span><span style="color: #e6db74">&#39;font&#39;</span><span style="color: #f8f8f2">,</span><span style="color: #f92672">**</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;family&#39;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;normal&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;weight&#39;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;bold&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;size&#39;</span>   <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">40</span><span style="color: #f8f8f2">})</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
+</pre></div>
+
+<figure class="align-center">
+    
+        <img src="https://www.mindbliss.com/blog/images/posts//images/post/how-calculate-mrr/output_10_0.png"  />
+    
+    
+</figure>
+
+<h4 id="rolling-mrr">Rolling MRR</h4>
+
+<p>As mentioned earlier, rolling MRR for each day is sum of daily MRR of past 30 days.</p>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%">    <span style="color: #f8f8f2">rolling_mrr</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[{</span>
+                <span style="color: #e6db74">&#39;date&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">x[</span><span style="color: #e6db74">&#39;date&#39;</span><span style="color: #f8f8f2">],</span>
+                <span style="color: #e6db74">&#39;mrc&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">x[</span><span style="color: #e6db74">&#39;mrc&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">sum([z[</span><span style="color: #e6db74">&#39;mrc&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">z</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">daily_mrr</span>
+                                       <span style="color: #f8f8f2">[</span><span style="color: #ae81ff">0</span> <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">daily_mrr</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">index(x)</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">30</span>
+                                        <span style="color: #66d9ef">else</span>
+                                        <span style="color: #f8f8f2">daily_mrr</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">index(x)</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">30</span><span style="color: #f8f8f2">:daily_mrr</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">index(x)]])}</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">daily_mrr]</span>
+
+    <span style="color: #75715e"># visualization</span>
+    <span style="color: #f8f8f2">dates</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">matplotlib</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">dates</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">date2num([x[</span><span style="color: #e6db74">&#39;date&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">rolling_mrr])</span>
+    <span style="color: #f8f8f2">y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[x[</span><span style="color: #e6db74">&#39;mrc&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">rolling_mrr]</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">figure(figsize</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">20</span><span style="color: #f8f8f2">))</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">plot_date(dates,</span> <span style="color: #f8f8f2">y,</span><span style="color: #e6db74">&#39;-&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">rc(</span><span style="color: #e6db74">&#39;font&#39;</span><span style="color: #f8f8f2">,</span><span style="color: #f92672">**</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;family&#39;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;normal&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;weight&#39;</span> <span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;bold&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;size&#39;</span>   <span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">40</span><span style="color: #f8f8f2">})</span>
+    <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
+</pre></div>
+
+<p>
+<figure class="align-center">
+    
+        <img src="https://www.mindbliss.com/blog/images/posts//images/post/how-calculate-mrr/output_12_0.png"  />
+    
+    
+</figure>
+
+	</p>
+	        
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59b80385708925be"></script>
+	
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer" class="container center">
+
+	© MINDBLISS 2017
+
+</footer>
+
+<!-- Scripts -->
+<script src="https://www.mindbliss.com/blog/js/jquery.min.js"></script>
+<script src="https://www.mindbliss.com/blog/js/jquery.poptrox.min.js"></script>
+<script src="https://www.mindbliss.com/blog/js/skel.min.js"></script>
+<script src="https://www.mindbliss.com/blog/js/util.js"></script>
+
+<script src="https://www.mindbliss.com/blog/js/main.js"></script>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-79852189-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+	</body>
+</html>
